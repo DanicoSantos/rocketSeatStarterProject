@@ -1,0 +1,16 @@
+{
+  "name": "starter-rocketseat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DanicoSantos/rocketSeatStarterProject.git",
+  "author": "Daniel Santos <dados.dan.santos@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1"
+  },
+  "scripts": {
+    "dev": "babel ./main.js -o ./bundle.js -w"
+  }
+}
