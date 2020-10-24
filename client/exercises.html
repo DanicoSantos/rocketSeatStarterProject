@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Square Generator</title>
+    <style>
+        .red-square {
+            float: left;
+            margin: 10px;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Red Square Generator -->
+    <button data-generate="square">Add square</button>
+
+    <div id="app" class="app">
+
+
+    </div>
+
+
+    <script>
+        const appContainer = document.querySelector("#app");
+
+        const addSquareButton = document.querySelector("[data-generate]");
+
+        // Create square 
+        const createSquare = () => document.createElement('div');
+
+        // Add style to square
+        const addStyleToSquare = square => square.classList.add("red-square");
+
+        // Add square to app container
+        const addSquareToAppContainer = square => appContainer.appendChild(square);
+
+        addSquareButton.addEventListener("click", () => {
+            let square = createSquare()
+            addStyleToSquare(square);
+            addSquareToAppContainer(square);
+        });
+
+
+        console.log();
+
+
+    </script>
+</body>
+
+</html>
