@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" name="user" />
+        <button>Buscar</button>
+        <ul></ul>
+    </div>
+
+    <script>
+        const appContainer = document.querySelector("#app");
+        const searchInput = appContainer.querySelector("input[name=user]");
+        const searchButton = appContainer.querySelector('button');
+        const repoList = appContainer.querySelector("ul");
+
+        const populateList = (items, list) => {
+            list.innerHTML = "";
+            for (item of items) {
+                let listItemElement = document.createElement("li");
+                let itemText = document.createTextNode(item.name);
+                listItemElement.appendChild(itemText)
+                list.appendChild(listItemElement);
+            }
+        }
+
+        const userNotFoundErrorHandler = data => {
+            if (data.status === 404) {
+                repoList.innerHTML = "";
+                let errorItemList = document.createElement("li");
+                let errorText = document.createTextNode("User not found !");
+                errorItemList.appendChild(errorText);
+                repoList.appendChild(errorItemList);
+            }
+        }
+
+
+        searchButton.addEventListener("click", () => {
+            repoList.innerHTML = "";
+            let loadingItemList = document.createElement("li");
+            let loadingText = document.createTextNode("Loading...");
+            loadingItemList.appendChild(loadingText);
+            repoList.appendChild(loadingItemList);
+            axios.get(`https://api.github.com/users/${searchInput.value}/repos`)
+                .then(response => populateList(response.data, repoList))
+                .catch(function (error) { userNotFoundErrorHandler(error.response)});
+        });
+    </script>
+</body>
+
+</html>
