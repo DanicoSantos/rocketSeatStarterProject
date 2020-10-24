@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name list</title>
+</head>
+
+<body>
+
+    <div id="app-controllers">
+        <input type="text" name="name" />
+        <button onclick="addItem()">Adicionar</button>
+    </div>
+
+    <div id="app"></div>
+
+    
+
+    <script>
+        const names = ["Diego", "Gabriel", "Lucas"];
+
+        const appContainer = document.querySelector("#app");
+        const nameInput = document.querySelector("input[name=name]");
+        const list = document.createElement("ul");
+
+        // Create a list item
+        const createListItem = () => document.createElement('li');
+
+        // Populates a given list with an array of items
+        const populateList = (items, list) => {
+            for (let item of items) {
+                let listItem = createListItem();
+                listItem.innerText = item;
+                list.appendChild(listItem);
+            }
+        };
+
+        // Populate list with names
+        populateList(names, list);
+
+        // Add list to app container
+        appContainer.appendChild(list);
+
+        // Add button handler
+        const addItem = () => {
+            if (nameInput.value) {
+                const list = appContainer.querySelector('ul');
+                let newItem = createListItem();
+                newItem.innerText = nameInput.value;
+                list.appendChild(newItem);
+                nameInput.value = "";
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
